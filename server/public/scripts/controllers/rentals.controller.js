@@ -4,6 +4,7 @@ app.controller('RentalsController', ['$http', function ($http) {
 
     self.rentals = [];
     self.newRental
+    self.showAdd = false;
 
     self.refreshRentals = function () {
         $http.get('/rentals').then(function(response) {
@@ -11,7 +12,7 @@ app.controller('RentalsController', ['$http', function ($http) {
             self.rentals = response.data;
         }).catch(function (error) {
             console.log('GET rentals failed');
-        })
+        });
     };
 
     self.refreshRentals();
@@ -23,7 +24,11 @@ app.controller('RentalsController', ['$http', function ($http) {
             self.refreshRentals();
         }).catch(function(error) {
             console.log('POST rentals failed');
-        })
+        });
         self.newRental = null;
+    };
+
+    self.showInput = function () {
+        self.showAdd = !self.showAdd;
     }
 }]);

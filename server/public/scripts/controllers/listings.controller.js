@@ -4,6 +4,7 @@ app.controller('ListingsController', ['$http', function ($http) {
 
     self.listings = [];
     self.newListing = {};
+    self.showAdd = false;
 
     self.refreshListings = function(){
         $http.get('/listings').then(function(response){
@@ -11,7 +12,7 @@ app.controller('ListingsController', ['$http', function ($http) {
             self.listings = response.data;
         }).catch(function(error){
             console.log('GET listings failed');
-        })
+        });
     };
 
     self.refreshListings();
@@ -23,7 +24,11 @@ app.controller('ListingsController', ['$http', function ($http) {
             self.refreshListings();
         }).catch(function (error) {
             console.log('POST listings failed');
-        })
+        });
         self.newListing = null;
+    };
+
+    self.showInput = function() {
+        self.showAdd = !self.showAdd;
     }
 }]);
