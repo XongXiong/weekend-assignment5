@@ -7,5 +7,7 @@ app.config(function ($routeProvider) {
     }).when('/rentals', {
         templateUrl: '../templates/rentals.html',
         controller: 'RentalsController as rentals'
-    })
+    }).when('/home',{
+        templateUrl: '../templates/home.html'
+    });
 });

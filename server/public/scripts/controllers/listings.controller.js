@@ -3,6 +3,7 @@ app.controller('ListingsController', ['$http', function ($http) {
     var self = this;
 
     self.listings = [];
+    self.newListing = {};
 
     self.refreshListings = function(){
         $http.get('/listings').then(function(response){
@@ -14,4 +15,9 @@ app.controller('ListingsController', ['$http', function ($http) {
     };
 
     self.refreshListings();
+
+    self.addListing = function(newListing){
+        console.log(newListing);
+        self.newListing = null;
+    }
 }]);
