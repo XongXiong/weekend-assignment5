@@ -17,7 +17,19 @@ router.get('/', function (req, res) {
             res.sendStatus(500);
         } else {
             res.send(foundRentals);
-        }
+        };
+    });
+});
+
+router.post('/', function(req, res){
+    var rentalToAdd = new Rental(req.body);
+    rentalToAdd.save(function(err, data){
+        if (err) {
+            console.log(err);
+            res.sendStatus(500);
+        } else {
+            res.send(201);
+        };
     });
 });
 

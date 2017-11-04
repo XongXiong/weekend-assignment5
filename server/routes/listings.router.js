@@ -21,4 +21,16 @@ router.get('/', function(req, res){
     });
 });
 
+router.post('/', function (req, res) {
+    var listingToAdd = new Listing(req.body);
+    listingToAdd.save(function (err, data) {
+        if (err) {
+            console.log(err);
+            res.sendStatus(500);
+        } else {
+            res.send(201);
+        };
+    });
+});
+
 module.exports = router;

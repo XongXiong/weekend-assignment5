@@ -18,6 +18,12 @@ app.controller('ListingsController', ['$http', function ($http) {
 
     self.addListing = function(newListing){
         console.log(newListing);
+        $http.post('/listings', newListing).then(function (response) {
+            console.log('New Listing Added');
+            self.refreshListings();
+        }).catch(function (error) {
+            console.log('POST listings failed');
+        })
         self.newListing = null;
     }
 }]);
