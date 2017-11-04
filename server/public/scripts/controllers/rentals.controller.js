@@ -3,6 +3,7 @@ app.controller('RentalsController', ['$http', function ($http) {
     var self = this;
 
     self.rentals = [];
+    self.newRental
 
     self.refreshRentals = function () {
         $http.get('/rentals').then(function (response) {
@@ -14,4 +15,9 @@ app.controller('RentalsController', ['$http', function ($http) {
     };
 
     self.refreshRentals();
+
+    self.addRental = function(newRental){
+        console.log(newRental);
+        self.newRental = null;
+    }
 }]);
