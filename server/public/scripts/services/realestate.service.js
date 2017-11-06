@@ -63,14 +63,21 @@ app.service('RealEstateService', function ($http) {
         };
     };
 
-    self.featuredItem = function(category) {
-        if(category.category ==='listings') {
-            $http.get('/listings/featured').then(function (response){
+    self.featuredItem = function (category) {
+        if (category.category === 'listings') {
+            $http.get('/listings/featured').then(function (response) {
                 console.log('Success getting favorite');
                 self.featured.data = response.data[0];
-            }).catch(function(err){
-                console.log('we in here');
-            })
-        }
-    }
+            }).catch(function (err) {
+                console.log('Failed to get favorite');
+            });
+        } else if (category.category === 'rentals') {
+            $http.get('/rentals/featured').then(function (response) {
+                console.log('Success getting favorite');
+                self.featured.data = response.data[0];
+            }).catch(function (err) {
+                console.log('Failed to get favorite');
+            });
+        };
+    };
 });

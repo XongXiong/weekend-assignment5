@@ -6,10 +6,15 @@ app.controller('RentalsController', function (RealEstateService) {
     self.newRental = {};
     self.showAdd = false;
     self.category = 'rentals';
+    self.featured = RealEstateService.featured;
+
+    self.featuredItem = function (rentals) {
+        RealEstateService.featuredItem(rentals);
+    };
 
     self.refreshRentals = function (rentals) {
         RealEstateService.refreshData(rentals);
-        console.log(self.rentals);
+        self.featuredItem(rentals);
     };
 
     self.addRental = function (newRental, rentals) {

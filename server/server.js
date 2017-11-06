@@ -6,7 +6,7 @@ var rentals = require('./routes/rentals.router.js');
 var port = process.env.PORT || 5000;
 
 /** ---------- MIDDLEWARE ---------- **/
-app.use(bodyParser.json()); // needed for angular requests
+app.use(bodyParser.json());
 app.use(express.static('server/public'));
 
 /** ---------- EXPRESS ROUTES ---------- **/
@@ -19,10 +19,8 @@ var mongoURI = '';
 // process.env.MONGODB_URI will only be defined if you
 // are running on Heroku
 if (process.env.MONGODB_URI) {
-    // use the string value of the environment variable
     mongoURI = process.env.MONGODB_URI;
 } else {
-    // use the local database server
     mongoURI = 'mongodb://localhost:27017/realestate';
 }
 
@@ -35,7 +33,6 @@ mongoose.connection.on('error', function () {
 });
 
 mongoose.connect(mongoURI);
-// Eventually, the mongooose code should be in a module
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {

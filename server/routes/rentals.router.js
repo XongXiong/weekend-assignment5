@@ -5,9 +5,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var RentalSchema = new Schema({ rent: Number, sqft: Number, city: String });
-// Rental links us to our collection
-// We pass in RentalSchema
-// Rentals is our collection
 var Rental = mongoose.model('Rental', RentalSchema, 'rentals');
 
 router.get('/featured', function (req, res) {

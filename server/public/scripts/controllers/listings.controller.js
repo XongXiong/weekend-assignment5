@@ -10,17 +10,14 @@ app.controller('ListingsController', function (RealEstateService) {
 
     self.featuredItem = function (listings) {
         RealEstateService.featuredItem(listings);
-        console.log(self.featured);
     };
 
     self.refreshListings = function (listings) {
         RealEstateService.refreshData(listings);
         self.featuredItem(listings);
-        console.log(self.listings);
     };
 
     self.addListing = function (newListing, listings) {
-        console.log(listings);
         if (newListing.city === undefined) {
             alert('Please enter a city.');
         } else if (newListing.sqft === undefined) {
