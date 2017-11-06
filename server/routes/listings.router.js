@@ -16,6 +16,7 @@ router.get('/featured', function (req, res) {
             console.log('Error', err);
             res.sendStatus(500);
         } else {
+            console.log(foundListings[0]);
             res.send(foundListings);
         };
     });

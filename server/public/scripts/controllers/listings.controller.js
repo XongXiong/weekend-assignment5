@@ -6,9 +6,16 @@ app.controller('ListingsController', function (RealEstateService) {
     self.newListing = {};
     self.showAdd = false;
     self.category = 'listings';
+    self.featured = RealEstateService.featured;
+
+    self.featuredItem = function (listings) {
+        RealEstateService.featuredItem(listings);
+        console.log(self.featured);
+    };
 
     self.refreshListings = function (listings) {
         RealEstateService.refreshData(listings);
+        self.featuredItem(listings);
         console.log(self.listings);
     };
 
