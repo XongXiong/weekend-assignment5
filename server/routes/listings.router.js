@@ -10,8 +10,19 @@ var ListingSchema = new Schema({ cost: Number, sqft: Number, city: String });
 // Listings is our collection
 var Listing = mongoose.model('Listing', ListingSchema, 'listings');
 
-router.get('/', function (req, res) {
+router.get('/featured', function (req, res) {
     Listing.find({}).sort('cost').exec(function (err, foundListings) {
+        if (err) {
+            console.log('Error', err);
+            res.sendStatus(500);
+        } else {
+            res.send(foundListings);
+        };
+    });
+});
+
+router.get('/', function (req, res) {
+    Listing.find({}, function (err, foundListings) {
         if (err) {
             console.log('Error', err);
             res.sendStatus(500);

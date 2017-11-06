@@ -10,8 +10,19 @@ var RentalSchema = new Schema({ rent: Number, sqft: Number, city: String });
 // Rentals is our collection
 var Rental = mongoose.model('Rental', RentalSchema, 'rentals');
 
-router.get('/', function (req, res) {
+router.get('/featured', function (req, res) {
     Rental.find({}).sort('rent').exec(function (err, foundRentals) {
+        if (err) {
+            console.log('Error', err);
+            res.sendStatus(500);
+        } else {
+            res.send(foundRentals);
+        };
+    });
+});
+
+router.get('/', function (req, res) {
+    Rental.find({}, function (err, foundRentals) {
         if (err) {
             console.log('Error', err);
             res.sendStatus(500);
