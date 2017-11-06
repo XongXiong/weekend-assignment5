@@ -17,8 +17,8 @@
 
 ## Hard Mode
 
-- [ ] Ability to delete an existing listings
-- [ ] Move all HTTP/Ajax requests to Angular Service(s)
+- [x] Ability to delete an existing listings
+- [x] Move all HTTP/Ajax requests to Angular Service(s)
 
 ## Pro Mode
 

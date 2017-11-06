@@ -1,34 +1,38 @@
-app.controller('ListingsController', ['$http', function ($http) {
+app.controller('ListingsController', function (RealEstateService) {
     console.log('ListingsController created.');
     var self = this;
 
-    self.listings = [];
+    self.listings = RealEstateService.listings;
     self.newListing = {};
     self.showAdd = false;
+    self.category = 'listings';
 
-    self.refreshListings = function(){
-        $http.get('/listings').then(function(response){
-            console.log('Success getting listings!');
-            self.listings = response.data;
-        }).catch(function(error){
-            console.log('GET listings failed');
-        });
+    self.refreshListings = function (listings) {
+        RealEstateService.refreshData(listings);
+        console.log(self.listings);
     };
 
-    self.refreshListings();
-
-    self.addListing = function(newListing){
-        console.log(newListing);
-        $http.post('/listings', newListing).then(function (response) {
-            console.log('New Listing Added');
-            self.refreshListings();
-        }).catch(function (error) {
-            console.log('POST listings failed');
-        });
-        self.newListing = null;
+    self.addListing = function (newListing, listings) {
+        console.log(listings);
+        if (newListing.city === undefined) {
+            alert('Please enter a city.');
+        } else if (newListing.sqft === undefined) {
+            alert('Please enter square feet.');
+        } else if (newListing.cost === undefined) {
+            alert('Please enter a cost.');
+        } else {
+            RealEstateService.addData(newListing, listings);
+            self.refreshListings(listings);
+            self.newListing = null;
+        };
     };
 
-    self.showInput = function() {
+    self.showInput = function () {
         self.showAdd = !self.showAdd;
-    }
-}]);
+    };
+
+    self.deleteItem = function (listingId, listings) {
+        RealEstateService.deleteData(listingId, listings);
+        self.refreshListings(listings);
+    };
+});

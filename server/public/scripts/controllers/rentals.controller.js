@@ -1,34 +1,37 @@
-app.controller('RentalsController', ['$http', function ($http) {
+app.controller('RentalsController', function (RealEstateService) {
     console.log('RentalsController created.');
     var self = this;
 
-    self.rentals = [];
-    self.newRental
+    self.rentals = RealEstateService.rentals;
+    self.newRental = {};
     self.showAdd = false;
+    self.category = 'rentals';
 
-    self.refreshRentals = function () {
-        $http.get('/rentals').then(function(response) {
-            console.log('Success getting rentals!');
-            self.rentals = response.data;
-        }).catch(function (error) {
-            console.log('GET rentals failed');
-        });
+    self.refreshRentals = function (rentals) {
+        RealEstateService.refreshData(rentals);
+        console.log(self.rentals);
     };
 
-    self.refreshRentals();
-
-    self.addRental = function(newRental){
-        console.log(newRental);
-        $http.post('/rentals', newRental).then(function(response){
-            console.log('New Rental Added');
-            self.refreshRentals();
-        }).catch(function(error) {
-            console.log('POST rentals failed');
-        });
-        self.newRental = null;
+    self.addRental = function (newRental, rentals) {
+        if (newRental.city === '') {
+            alert('Please enter a city.');
+        } else if (newRental.sqft === '') {
+            alert('Please enter square feet.');
+        } else if (newRental.cost === '') {
+            alert('Please enter a rent amount.');
+        } else {
+            RealEstateService.addData(newRental, rentals)
+            self.refreshRentals(rentals);
+            self.newRental = null;
+        };
     };
 
     self.showInput = function () {
         self.showAdd = !self.showAdd;
-    }
-}]);
+    };
+
+    self.deleteItem = function (rentalId, rentals) {
+        RealEstateService.deleteData(rentalId, rentals);
+        self.refreshRentals(rentals);
+    };
+});

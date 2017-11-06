@@ -1,7 +1,7 @@
-<h2>For Rent</h2>
+<h2 ng-init="rentals.refreshRentals(rentals)">For Rent</h2>
 <div id="inputNew">
     <button class="btn btn-primary" ng-click="rentals.showInput()">Add New Rental</button>
-<form ng-show="rentals.showAdd" ng-submit="rentals.addRental(rentals.newRental)">
+<form ng-show="rentals.showAdd" ng-submit="rentals.addRental(rentals.newRental, rentals)">
     <label for="city">City:</label>
     <input type="text" ng-model="rentals.newRental.city" placeholder="Enter City">
     <label for="sqft">Square Feet:</label>
@@ -15,6 +15,9 @@
     <thead>
         <tr>
             <th>
+                #
+            </th>
+            <th>
                 City
             </th>
             <th>
@@ -23,13 +26,20 @@
             <th>
                 Cost
             </th>
+            <th>
+                Delete?
+            </th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="rental in rentals.rentals">
+        <tr ng-repeat="rental in rentals.rentals.data">
+            <td>{{$index + 1}}</td>
             <td>{{rental.city}}</td>
             <td>{{rental.sqft}}</td>
             <td>{{rental.rent}}</td>
+            <td>
+                <button type="button" ng-click="rentals.deleteItem(rental._id, rentals)">Delete</button>
+            </td>
         </tr>
     </tbody>
 </table>
