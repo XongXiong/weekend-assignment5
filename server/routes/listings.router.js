@@ -11,7 +11,7 @@ var ListingSchema = new Schema({ cost: Number, sqft: Number, city: String });
 var Listing = mongoose.model('Listing', ListingSchema, 'listings');
 
 router.get('/', function (req, res) {
-    Listing.find({}, function (err, foundListings) {
+    Listing.find({}).sort('cost').exec(function (err, foundListings) {
         if (err) {
             console.log('Error', err);
             res.sendStatus(500);
