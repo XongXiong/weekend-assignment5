@@ -12,8 +12,7 @@ router.get('/featured', function (req, res) {
         if (err) {
             console.log('Error', err);
             res.sendStatus(500);
-        } else {
-            console.log(foundListings[0]);
+        } else {;
             res.send(foundListings);
         };
     });
@@ -34,7 +33,7 @@ router.post('/', function (req, res) {
     var listingToAdd = new Listing(req.body);
     listingToAdd.save(function (err, data) {
         if (err) {
-            console.log(err);
+            console.log('Error', err);
             res.sendStatus(500);
         } else {
             res.send(201);

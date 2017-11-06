@@ -33,7 +33,7 @@ router.post('/', function (req, res) {
     var rentalToAdd = new Rental(req.body);
     rentalToAdd.save(function (err, data) {
         if (err) {
-            console.log(err);
+            console.log('Error', err);
             res.sendStatus(500);
         } else {
             res.send(201);

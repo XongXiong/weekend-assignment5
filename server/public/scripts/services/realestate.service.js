@@ -12,7 +12,6 @@ app.service('RealEstateService', function ($http) {
             $http.get('/listings').then(function (response) {
                 console.log('Success getting listings!');
                 self.listings.data = response.data;
-                console.log(self.listings);
             }).catch(function (error) {
                 console.log('GET listings failed');
             });
@@ -20,7 +19,6 @@ app.service('RealEstateService', function ($http) {
             $http.get('/rentals').then(function (response) {
                 console.log('Success getting rentals!');
                 self.rentals.data = response.data;
-                console.log(self.rentals);
             }).catch(function (error) {
                 console.log('GET listings failed');
             });
