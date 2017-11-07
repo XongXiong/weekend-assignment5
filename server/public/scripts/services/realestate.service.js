@@ -9,14 +9,14 @@ app.service('RealEstateService', function ($http) {
     self.refreshData = function (category) {
         console.log(category.category);
         if (category.category === 'listings') {
-            $http.get('/listings').then(function (response) {
+            return $http.get('/listings').then(function (response) {
                 console.log('Success getting listings!');
                 self.listings.data = response.data;
             }).catch(function (error) {
                 console.log('GET listings failed');
             });
         } else if (category.category === 'rentals') {
-            $http.get('/rentals').then(function (response) {
+            return $http.get('/rentals').then(function (response) {
                 console.log('Success getting rentals!');
                 self.rentals.data = response.data;
             }).catch(function (error) {
